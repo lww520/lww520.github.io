@@ -9,12 +9,12 @@ Test
 </body>
 <script>
     var ws;
-    var url = "wss://127.0.0.1:8080/websocket";
+    var url = "wss://127.0.0.1:8080/websocket/messageBus";
     function connect() {
         alert(1);
         if ('WebSocket' in window) {
             console.log('Websocket supported');
-            ws = new WebSocket('ws://127.0.0.1:8080/websocket/messageBus');
+            ws = new WebSocket(url);
             console.log('Connection attempted');
 
             ws.onopen = function () {
