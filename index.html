@@ -5,5 +5,38 @@
 </head>
 <body>
 Test
+    <button type="submit" value="Connect" onclick="connect()">
 </body>
+<script>
+    var ws;
+    var url = "ws://localhost:8080/websocket";
+    function connect() {
+        if ('WebSocket' in window) {
+            console.log('Websocket supported');
+            ws = new WebSocket('ws://127.0.0.1:8080/websocket/messageBus');
+            console.log('Connection attempted');
+
+            ws.onopen = function () {
+                console.log('Connection open!');
+            }
+            ws.onclose = function () {
+                console.log('Disconnecting connection');
+            }
+
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+                console.log(received_msg);
+                console.log('message received!');
+                showMessage(received_msg);
+            }
+
+        } else {
+            console.log('Websocket not supported');
+        }
+    }
+
+    function showMessage(message) {
+        alert(message);
+    }
+</script>
 </html>
